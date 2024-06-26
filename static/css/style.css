@@ -1,0 +1,29 @@
+
+.container {
+    text-align: center;
+}
+
+.bi-cart2 {
+    font-size: 30px !important;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    background-color: #1dbb84;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+
+

@@ -1,0 +1,21 @@
+{% if current_user.vaitro == 'admin' %}
+        <nav class="navbar navbar-expand-sm fixed-top" style="background-color: #1dbb84; font-size: 18px; font-family: 'Times New Roman', Times, serif;">
+            <a class="navbar-brand text-light" href="{{url_for('quantri')}}" >Trang Quản Trị</a>
+            <ul class="navbar-nav">
+                <a class="navbar-brand text-light" href="{{url_for('home')}}" >Trở Về Web</a>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url_for('quanlydanhmuc') }}" >Quản Lý Danh Mục</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url_for('quanlysanpham') }}" >Quản Lý Sản Phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url_for('quanlydonhang') }}" >Quản Lý Đơn Hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url_for('quanlynguoidung') }}" >Quản Lý Người Dùng</a>
+                </li>
+            </ul>
+        </nav>
+
+    {% endif %}

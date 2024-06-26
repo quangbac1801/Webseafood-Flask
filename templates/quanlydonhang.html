@@ -1,0 +1,62 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Quản Lý Đơn Hàng{% endblock %}
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        <h4>{{ message }}</h4>
+      </div>
+    {% endfor %}
+  {% endwith %}
+  
+<h2 class="container">Quản Lý Đơn Hàng</h2>
+<form class="form-inline ">
+  <input name="id_donhang" type="number" placeholder="Nhập mã đơn hàng" class="form-control mr-sm-2 ">
+  <button class="btn btn-info" type="submit">Tìm</button>
+</form>
+<br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Họ Tên</th>
+        <th scope="col">Sản phẩm</th>
+        <th scope="col">Số Lượng</th>
+        <th scope="col">Thành Tiền</th>
+        <th scope="col">Số Điện Thoại</th>
+        <th scope="col">Địa Chỉ</th>
+        <th scope="col">Trạng Thái</th>
+        <th scope="col">Ngày Đặt</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for donhang in donhangs %}
+        <tr>
+            <td>{{ donhang.id_donhang }}</td>
+            <td>{{ donhang.user.name }}</td>
+            <td>{{ donhang.cart.product.name }}</td>
+            <td>{{ donhang.cart.soluong }}</td>
+            <td>{{ donhang.thanhtien }}</td>
+            <td>{{ donhang.user.phone }}</td>
+            <td>{{ donhang.user.diachi }}</td>
+            <td>{{ donhang.trangthai }}</td>
+            <td>{{ donhang.ngaytao }}</td>
+            <td><a href="{{url_for('capNhatDonHang', id_donhang=donhang.id_donhang)}}" class="btn btn-primary"><i class="bi bi-pencil"></i></a></td>
+        <td><a href="#" onclick="delete_DonHang('{{donhang.id_donhang}}')" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+  
+<script>
+  function delete_DonHang(id_donhang) {
+      if (confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
+          window.location.href = "{{ url_for('xoaDonHang') }}?id_donhang=" + id_donhang;
+      }
+  }
+</script>
+{% endblock %}

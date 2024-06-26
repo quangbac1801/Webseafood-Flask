@@ -1,0 +1,41 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Quản trị{% endblock %}
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+<h2 class="container"> Cập Nhật Đơn Hàng</h2>
+<form  method="post">
+    <div class="container" style="width: 50%;">
+    <div class="form-group ">
+        <label for="id_donhang">Id Đơn Hàng</label>
+        <input type="text" class="form-control" name="id_donhang" id="id_donhang" value="{{ donhang.id_donhang }}" readonly>
+
+    </div>
+    <div class="form-group ">
+        <label for="id_user">ID Người Dùng</label>
+        <input type="text" class="form-control" name="id_user" id="id_user" value="{{donhang.id_user}}" readonly>
+    </div>
+    <div class="form-group ">
+      <label for="id_giohang">Mã Giỏ Hang</label>
+      <input type="text" class="form-control" name="id_giohang" id="id_giohang" value="{{donhang.id_giohang}}" readonly>
+  </div>
+    <div class="form-group ">
+        <label for="thanhtien">Thành Tiền</label>
+        <input type="text" class="form-control" name="thanhtien" id="thanhtien" value="{{donhang.thanhtien}}" readonly>
+    </div>
+    
+    <div class="form-group ">
+        <label for="trangthai">Trạng Thái</label>
+        <select name="trangthai" id="trangthai" value="{{donhang.trangthai}}">
+            <option value="Đang Chuẩn Bị Hàng">Đang Chuẩn Bị Hàng</option>
+            <option value="Đang Giao Hàng">Đang Giao Hàng</option>
+            <option value="Đã Giao Hàng">Đã Giao Hàng</option>
+        </select>
+    </div>
+    
+    <div class="form-group ">
+        <input type="submit" value="Cập Nhật" class="btn btn-danger">
+    </div>
+</div>
+</form>
+{% endblock %}

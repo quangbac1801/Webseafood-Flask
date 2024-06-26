@@ -1,0 +1,55 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Quản trị{% endblock %}
+
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+{% if current_user.vaitro == 'admin' %}
+<h3 class="text-info">Xin chào, {{current_user.name }}!</h3>
+
+<br>
+<div class="row">
+  <div class="col-md-6">
+<h4> Tra Cứu Theo Sản Phẩm và Danh Mục</h4>
+  <form class="form-inline "method="post">
+    <input type="text" name="thongke" placeholder="Nhập thông tin tìm kiếm" class="form-control mr-sm-2 ">
+    <button class="btn"type="submit">Tra</button>
+  </form>
+
+  <ul>
+    {% for sp, dm in kq %}
+      <li>{{ sp.name }} - {{ dm.name }}</li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Thông tin thống kê</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">Tổng số Loại Hàng</td>
+        <td>{{ sum_danhmuc }}</td>
+      </tr>
+      <tr>
+        <td scope="row">Tổng số Sản Phẩm</td>
+        <td>{{ sum_sanpham }}</td>
+      </tr>
+      <tr>
+        <td scope="row">Tổng số đơn hàng</td>
+        <td>{{ sum_donhang }}</td>
+      </tr>
+      <tr>
+        <td scope="row">Doanh số bán hàng</td>
+        <td>{{ "{:,.0f}".format(doanhso) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+  {% endif %}
+{% endblock %}

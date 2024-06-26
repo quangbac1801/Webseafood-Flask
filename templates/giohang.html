@@ -1,0 +1,55 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Giỏ Hàng{% endblock %}
+{% block content %} 
+<div class="container mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        <h4>{{ message }}</h4>
+      </div>
+    {% endfor %}
+{% endwith %}
+    <h2>Giỏ Hàng</h2>
+
+
+    {% if giohang_sp %}
+    <form method="post" action="{{ url_for('xoa_giohang')}}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Sản Phẩm</th>
+                    <th scope="col">Số Lượng</th>
+                    <th scope="col">Đơn Giá</th>
+                    <th scope="col">Thành Tiền</th>
+                    <th scope="col"><button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button></th>
+                </tr>
+            </thead>
+            <tbody>   
+                {% for item in giohang_sp %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.soluong }}</td>
+                    <td>{{ "{:,.0f}".format(item.gia) }}</td>
+                    <td>{{ "{:,.0f}".format(item.thanhtien) }}</td>
+                    <td>
+                        <input type="checkbox" name="select_items" value="{{ item.id_giohang}}">
+                    </td>
+                </tr>
+                {% endfor %}      
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h5>Tổng Thành Tiền: {{ "{:,.0f}".format(tong_tien) }}</h5>
+            <a href="{{url_for('thanhtoan')}}" class="btn btn-success">Thanh Toán</a>
+        </div>
+    </form>
+    <br>
+
+    {% else %}
+        <p>Giỏ hàng của bạn trống rỗng. <a href="{{url_for('home')}}">Quay lại mua sắm</a>.</p>
+    {% endif %}
+</div>
+
+{%endblock%}

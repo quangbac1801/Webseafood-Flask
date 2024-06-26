@@ -1,0 +1,23 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Quản trị{% endblock %}
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+<h2 class="container">Cập Nhật Danh Mục</h2>
+<form method="post">
+    <div class="container" style="width: 50%;">
+    <div class="form-group">
+        <label for="id_danhmuc">Id Danh Mục</label>
+        <input type="text" class="form-control" name="id_danhmuc" id="id_danhmuc" value="{{ danh_muc.id_danhmuc }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="name">Tên Danh Mục</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{ danh_muc.name }}">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cập Nhật" class="btn btn-danger">
+    </div>
+    </div>
+</form>
+
+{% endblock %}

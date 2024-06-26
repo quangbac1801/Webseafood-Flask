@@ -1,0 +1,59 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Thêm Sản Phẩm{% endblock %}
+
+{% block content %}
+{% include 'layout/admin_header.html' %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        <h4>{{ message }}</h4>
+      </div>
+    {% endfor %}
+{% endwith %}
+  <h2 class="container">Thêm Sản Phẩm</h2>
+
+  <form method="post">
+    <div class="container" style="width: 50%;">
+    <div class="form-group container">
+        <label for="id_sanpham">ID Sản Phẩm</label>
+        <input type="number" class="form-control" name="id_sanpham" id="id_sanpham" required>
+    </div>
+    
+    <div class="form-group container">
+        <label for="name">Tên Sản Phẩm</label>
+        <input type="text" class="form-control" name="name" id="name" required>
+    </div>
+    
+    <div class="form-group container">
+        <label for="mota">Mô Tả</label>
+        <input type="text" class="form-control" name="mota" id="mota">
+    </div>
+    
+    <div class="form-group container">
+        <label for="gia">Giá</label>
+        <input type="text" class="form-control" name="gia" id="gia" required>
+    </div>
+    
+    <div class="form-group container">
+        <label for="anh">Ảnh</label>
+        <input type="file" class="form-control" name="anh" id="anh" multiple>
+    </div>
+    
+    <div class="form-group container">
+        <label for="id_danhmuc">ID Danh Mục</label>
+        <select class="form-control" name="id_danhmuc" id="id_danhmuc" required>
+            {% for category in danh_muc_list %}
+                <option value="{{ category.id_danhmuc }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group container">
+        <input type="submit" value="Thêm Sản Phẩm" class="btn btn-primary">
+    </div>
+</div>
+</form>
+
+  
+{% endblock %}

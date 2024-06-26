@@ -1,0 +1,54 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Thanh Toán{% endblock %}
+{% block content %} 
+<div class="container mt-5">
+    <h1>Thanh Toán</h1>
+
+    <div>
+        <h3>Thông Tin Người Dùng</h3>
+        <p>Username: {{ user_info.username }}</p>
+        <p>Họ Và Tên: {{ user_info.name }}</p>
+        <p>Số Điện Thoại: {{ user_info.phone }}</p>
+        <p>Địa Chỉ: {{ user_info.diachi }}</p>
+    </div>
+    <div>
+        <h3>Chi Tiết Đơn Hàng</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Sản Phẩm</th>
+                    <th scope="col">Số Lượng</th>
+                    <th scope="col">Đơn Giá</th>
+                    <th scope="col">Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_nguoidung %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.soluong }}</td>
+                        <td>{{ "{:,.0f}".format(item.gia) }}</td>
+                        <td>{{ "{:,.0f}".format(item.thanhtien) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Display total amount -->
+    <div>
+        <h3>Tổng Thành Tiền</h3>
+        <p>{{ "{:,.0f}".format(cart_nguoidung | map(attribute='thanhtien') | sum) }}</p>
+
+    </div>
+
+    <!-- Payment form -->
+    <form method="post" action="{{ url_for('thanhtoan') }}">
+        <!-- Add any additional payment-related fields or options here -->
+
+        <button type="submit" class="btn btn-success">Xác Nhận Thanh Toán</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Cá Nhân{% endblock %}
+{% block content %} 
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        <h4>{{ message }}</h4>
+      </div>
+    {% endfor %}
+  {% endwith %}
+  
+    <div class="row" style="margin-left: 10px;">
+    <div class="col-md-6" >
+        <h1 class="text-info">{{ user.username }}'</h1>
+        <h2>Thông tin tài khoản:</h2>
+        <p><i class="bi bi-person-lines-fill"></i> Họ Tên: {{ user.name }}</p>
+        <p><i class="bi bi-envelope-at text-danger"></i> Email: {{ user.email }}</p>
+        <p><i class="bi bi-telephone-fill text-primary"></i> Số Điện Thoại: {{ user.phone }}</p>
+        <p><i class="bi bi-house-fill text-secondary"></i> Địa Chỉ: {{ user.diachi }}</p>
+        <p><a href="{{ url_for('suataikhoan', id_user=user.id_user) }}" class="btn btn-primary">Thay Đổi</a></p>
+    </div>
+
+    
+    <div class="col-md-6">
+        <h2 class="text-danger">Thông Tin Đơn Hàng</h2>
+    <ul>
+        {% for donhang in donhangs %}
+    <li>Mã đơn hàng: {{ donhang.id_donhang }} </li>
+    <li>Sản Phẩm: {{ donhang.cart.product.name }} </li>
+    <li>Số Lượng:{{ donhang.cart.soluong}}</li>
+    <li>Thành Tiền: {{ donhang.thanhtien }} </li>
+    <li>Tình Trạng: {{ donhang.trangthai }}</li>
+    <p><a href="#" onclick="delete_DonHang('{{donhang.id_donhang}}')" class="btn btn-danger">Hủy Đơn Hàng</a></p>
+{% endfor %}
+    </ul>
+    </div>
+    </div>
+    <br>
+<script>
+        function delete_DonHang(id_donhang) {
+            if (confirm("Bạn có chắc hủy đơn hàng này?")) {
+                window.location.href = "{{ url_for('xoaDonHang') }}?id_donhang=" + id_donhang;
+            }
+        }
+</script>
+{%endblock%}

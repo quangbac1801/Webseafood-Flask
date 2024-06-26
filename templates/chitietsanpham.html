@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Giỏ Hàng{% endblock %}
+{% block content %} 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        <h4>{{ message }}</h4>
+      </div>
+    {% endfor %}
+{% endwith %}
+<br>
+    <div class="row">
+    <div class="col-md-6 container" >
+        <img src="{{url_for('static',filename='images/'+product.anh)}}" width="400px" alt="{{product.name}}">
+    </div>
+
+    <div class="col-md-6">
+        <h2>{{product.name}}</h2>
+        <h4>Mô Tả:</h4>
+        <p>{{product.mota}}</p>
+        <p> <i class="bi bi-truck text-secondary"></i>
+            MIỄN PHÍ GIAO HÀNG với hóa đơn từ 700,000đ</p>
+        <p><i class="bi bi-stopwatch text-success"></i> Giao Hàng Trong Ngày</p>
+        <p><i class="bi bi-check2-all text-danger"></i> Đảm Bảo Chất Lượng</p>
+        <h4>{{ "{:,.0f}".format(product.gia) }} <sup>VNĐ</sup>/kg</h4>
+        <form method="POST" action="{{ url_for('dat_hang') }}">
+            <input type="hidden" name="id_product" value="{{ product.id_sanpham }}">
+            <input type="hidden" name="gia" value="{{ product.gia }}">
+            <button type="submit" class="btn btn-primary">Đặt Hàng</button>
+        </form>
+    </div>
+    
+    </div>
+    <br>
+{%endblock%}

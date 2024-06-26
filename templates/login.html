@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đăng Nhập{% endblock %}
+{% block content %} 
+{% if err %}
+<div class="alert alert-danger">
+    <h4>{{err}}</h4>
+</div>
+{% endif %}
+<h3 class="container">Đăng Nhập <i class="bi bi-person-fill-lock"></i></h3>
+<form method="post">
+    <div class="container" style="width: 50%;">
+        <div class="form-group">
+            <label for="username">Tên Tài Khoản</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Nhập username">
+        </div>
+        <div class="form-group">
+            <label for="password">Mật Khẩu</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Nhập Mật Khẩu">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Đăng Nhập" class="btn btn-danger">
+        </div>
+    </div>
+</form>
+
+<br>
+{%endblock%}

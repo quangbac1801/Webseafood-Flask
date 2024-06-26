@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Sửa Thông Tin{% endblock %}
+{% block content %} 
+<h1>Sửa Thông Tin Tài Khoản</h1>
+<form method="post">
+    <label for="name">Họ Tên:</label>
+    <input type="text" name="name" value="{{ user.name }}" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ user.email }}" required>
+
+    <label for="phone">Số Điện Thoại:</label>
+    <input type="tel" name="phone" value="{{ user.phone }}" required>
+
+    <label for="diachi">Địa Chỉ:</label>
+    <input type="text" name="diachi" value="{{ user.diachi }}" required>
+
+    <button type="submit">Lưu Thay Đổi</button>
+</form>
+{% endblock %}

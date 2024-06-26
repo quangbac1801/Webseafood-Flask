@@ -1,0 +1,56 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Quản Lý Danh Mục{% endblock %}
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+<h2 class="container">Quản Lý Danh Mục</h2>
+
+<form class="form-inline ">
+  <input name="id_danhmuc" type="number" placeholder="Nhập id" class="form-control mr-sm-2 ">
+  <input name="tuKhoa" type="text" placeholder="Nhập từ khóa" class="form-control mr-sm-2 ">
+  <button class="btn btn-info" type="submit">Tìm</button>
+</form>
+
+<br>
+<a href="{{ url_for('themDanhMuc') }}" class="btn btn-success">Thêm +</a>
+<table class="table">
+    <thead>
+      <tr >
+        <th scope="col">ID</th>
+        <th scope="col">Tên Danh Mục</th>
+        <th scope="col">Ngày Tạo</th>
+        <th scope="col">Ngày Cập Nhập</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for c in danhmucs %}
+      <tr>
+        <td>{{c.id_danhmuc}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.ngaytao}}</td>
+        <td>{{c.ngaycapnhat}}</td>
+        <td><a href="{{url_for('capNhatDanhMuc',id_danhmuc=c.id_danhmuc)}}" class="btn btn-primary"><i class="bi bi-pencil"></i></a></td>
+        <td><a href="#" onclick="delete_DanhMuc('{{c.id_danhmuc}}')" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" id="flash-message">
+      <h4>{{ message }}</h4>
+    </div>
+  {% endfor %}
+{% endwith %}
+
+<script>
+  function delete_DanhMuc(id_danhmuc) {
+      if (confirm("Bạn có chắc muốn xóa danh mục này?")) {
+          window.location.href = "{{ url_for('xoaDanhMuc') }}?id_danhmuc=" + id_danhmuc;
+      }
+  }
+</script>
+{% endblock %}

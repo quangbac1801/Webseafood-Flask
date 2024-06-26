@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Quản trị{% endblock %}
+{% block content %} 
+{% include 'layout/admin_header.html' %}
+<h2 class="container"> Cập Nhật Tài Khoản</h2>
+<form  method="post">
+    <div class="container" style="width: 50%;">
+    <div class="form-group">
+        <label for="id_user">Id Người Dùng</label>
+        <input type="text" class="form-control" name="id_user" id="id_user" value="{{ user.id_user }}" readonly>
+
+    </div>
+    <div class="form-group">
+        <label for="name">Họ Tên</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{user.name}}">
+    </div>
+    <div class="form-group">
+      <label for="username">Tên Tài Khoản</label>
+      <input type="text" class="form-control" name="username" id="username" value="{{user.username}}">
+  </div>
+    <div class="form-group">
+        <label for="password">Mật Khẩu</label>
+        <input type="password" class="form-control" name="password" id="password" value="{{user.password}}">
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" id="email" value="{{user.email}}" >
+    </div>
+    <div class="form-group">
+        <label for="phone">Số Điện Thoại</label>
+        <input type="text" class="form-control" name="phone" id="phone" value="{{user.phone}}" >
+    </div>
+    <div class="form-group">
+        <label for="diachi">Địa Chỉ</label>
+        <input type="text" class="form-control" name="diachi" id="diachi" value="{{user.diachi}}" >
+    </div>
+    <div class="form-group">
+        <label for="vaitro"> Vai Trò</label>
+        <select class="form-control" name="vaitro" id="vaitro" value="{{user.vaitro}}">
+                <option>user</option>
+                <option>admin</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cập Nhật" class="btn btn-danger">
+    </div>
+</div>
+</form>
+{% endblock %}
